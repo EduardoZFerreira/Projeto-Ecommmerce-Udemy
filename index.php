@@ -1,19 +1,16 @@
 <?php 
 
 require_once("vendor/autoload.php");
+use \Slim\Slim;
+use \System\Page;
 
-$app = new \Slim\Slim();
+$app = new Slim();
 
 $app->config('debug', true);
 
 $app->get('/', function() {
-    
-	$sql = new System\DB\Sql();
-
-	$results = $sql->select("SELECT * FROM TB_USERS");
-	echo json_encode($results);
+	$page = new Page(["data" => ["title" => "Home"]]);
+	$page->SetTpl("index", ["pageName" => "Homepage"]);
 });
 
 $app->run();
-
- ?>
